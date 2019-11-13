@@ -1,0 +1,215 @@
+
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+#include <string>
+#include <vector>
+#include <stdlib.h>
+
+using namespace std;
+
+const int MAX_ITEMS = 10;
+string inventory [MAX_ITEMS];
+int numItems = 0;
+int i = 0;
+bool magic_ring=false;
+char yes_no = 'y';
+char direction = 'o';
+char direction2 = 'o';
+char direction3 = 'o';
+//char selection = 'o';
+//char selection2 = 'o';
+char deadoralive = 'y';
+char entrance();
+void magic_room();
+void instructions();
+char dead();
+
+int main()
+{
+
+do{
+	instructions();
+
+	entrance();
+
+	switch (direction)
+	{
+
+    case 'w':
+            cout << "You see a chest its not locked you got a Gold Key\n";
+            inventory[numItems++] = "Gold Key";
+            cout << "The pathway continues heading West you can see a door.\n";
+            cout << "Do you continue (w)west toward the door or (g)o back the way you came?\n";
+            cin >> direction2;
+            do
+            {
+                if (direction2 == 'w')
+                {
+                    cout << "You see a White Door it is unlocked you open the door.\n";
+                    cout << "You see a lot of treasure in the vault, \n";
+                    cout << "as you are looking around the door slams shut\n";
+                    cout << "You are locked in, and you slowly die!";
+                    dead();
+                }
+                else if (direction2 == 'g')
+                    {
+                    entrance();
+                    }
+            }while ((direction2 =! 'w') && (direction2 =! 'g'));
+            break;
+
+    case 'e':
+
+        cout << "You see a chest its not locked you got a Blue Key\n";
+        inventory[numItems++] = "Blue Key";
+        cout << "As you continue on heading east you see a path off to the north,\n";
+        cout << "The pathway continues heading east you can see a door.\n";
+        cout << "Do you continue (e)ast toward the door, head down the new path (n)orth or (g)o back the way you came?\n";
+        cin >> direction3;
+        do {
+            if (direction3 == 'e')
+            {
+                cout << "You see a Green Door it is locked do you have the key?\n";
+                for (i=0;i<10; i++)
+                {
+                    if ((inventory[i]) == ("Green Key"))
+                    {
+                        cout << "You have the Green Key.  You opened the Green Door!\n";
+                        cout << "You can not see much in the room its dark.\n";
+                        cout << "You hear a weird rumbling noise then spikes come up from the floor killing you\n";
+                        dead();
+                    }
+                    else
+                    {
+                        cout << "You do not have the Green Key!\n";
+                        cout << "You go back to the entrance\n\n";
+                        entrance();
+                     }
+
+                }
+            }
+            if (direction3 == 'n')
+            {
+                magic_room();
+            }
+
+            else if (direction3 == 'g')
+                {
+                entrance();
+                }
+            }
+            while (((direction3 =! 'e') && (direction3 =! 'n') && (direction3 =! 'g')));
+            break;
+
+    case 'n':
+        cout << "You see a blue door its locked do you have the key?\n";
+        for (i=0; i<10; i++)
+        {
+            if ((inventory[i]) == ("Blue Key"))
+            {
+                cout << "You have the Blue Key.  You opened the Blue Door!\n";
+                cout << "You that the doorway options into a hallway which splits into three different directions.\n";
+                cout << "One path splits off towards the (w)est another to the (e)ast and lastly continue heading (n)orth\n";
+                cout << "Which was do you want to go enter your selection\n";
+                cin >> direction2;
+                do {
+                    if ((direction2) == ('e'))
+                    {
+                     cout << "\nYou see a chest its not locked.\n";
+                     cout << "You got a Black Key!\n";
+                     inventory[numItems++] = "Black Key";
+                     cout << "You return to the entrance.\n\n";
+                     entrance();
+                    }
+                    else if ((direction2) == ('w'))
+                    {
+                        cout << "\nYou see a chest its not locked.\n";
+                        cout << "You got a Green Key!\n";
+                        inventory[numItems++] = "Green Key";
+                        cout << "You return to the entrance.\n\n";
+                        entrance();
+                    }
+
+                    else if ((direction2) == ('n'))
+                    {
+                        cout << "You see a Red Door it not locked. \n";
+                        cout << "When you open the door you see a large Dragon!!\n";
+                        cout << "He breaths fire on you killing you!\n";
+                        dead();
+                    }
+                    } while (((direction2 =! 'w') && (direction2 =! 'e') && (direction2 =! 'n')));
+                    break;
+            }
+            else
+                {
+                cout << "Sorry you don't have the Blue Key.\n";
+                cout << "You return to the entrance.\n\n";
+                entrance();
+                }
+        }
+    }break;
+
+}
+while (deadoralive == 'y');
+	return 0;
+}
+
+void instructions()
+{
+	cout << "*************************************************************\n";
+	cout << "** Welcome to a Scavenger Hunt text based Adventure Game.  **\n";
+	cout << "*************************************************************\n";
+    cout << "**  You will be given options during the game which will   **\n";
+	cout << "**           affect the outcome of the game.               **\n";
+	cout << "**        When asked to pick a letter pick the letter      **\n";
+	cout << "**               that is inside brackets.                  **\n";
+	cout << "**               Let us begin; Shall We.                   **\n";
+    cout << "*************************************************************\n\n\n";
+}
+
+char entrance()
+{
+	do
+	{
+	cout << "There is a door to the north, to your west appears to be a chest.\n";
+	cout << "To your east is what appears to be a chest.\n";
+	cout << "Which direction would you like to go? (w)est, (n)orth, or (e)ast?\n";
+	cin >> direction;
+	}while (((direction != 'w') && (direction != 'e') && (direction != 'n')));
+	return direction;
+}
+void magic_room()
+{
+        cout << "You see a Gold Door its locked do you have the key?\n";
+        for (i=0; i<10; i++)
+        {
+            if ((inventory[i]) == ("Gold Key"))
+            {
+                cout << "You have the Gold Key.  You opened the Gold Door!\n";
+                cout << "You see a room with a chest contains a bag of gold and a magic ring.\n";
+                cout << "The magic ring starts glowing!!\n";
+                cout << "You are transported to the outside of dungeon!\n";
+                cout << "Congratulations you Won the Game!!!\n";
+                inventory[numItems++] = "Bag of Gold";
+                magic_ring = true;
+                break;
+            }
+            else
+            {
+                cout << "Sorry you don't have the Gold Key.\n";
+                cout << "You go back to the entrance\n";
+                entrance();
+            }
+        }
+
+}
+
+char dead()
+{
+cout << "Sorry you are dead. Would you like to play again?\n";
+cout << "(y)es or (n)o please enter your selection.\n";
+cin >> deadoralive;
+system ("CLS");
+return deadoralive;
+}
